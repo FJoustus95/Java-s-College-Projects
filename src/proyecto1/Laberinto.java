@@ -1,23 +1,58 @@
-package proyecto1;
+
 
 import java.util.Random;
 import java.util.Scanner;
-
-    public class Laberinto {
-           
-        public static Scanner leer = new Scanner(System.in);
-        public static Random aleatorio = new Random();
-        int opcionLaberinto;
-    int laberintosCreados = 1;
-    String nombreLaberinto;
-    //jugador jugador = new jugador();
-    Laberinto[] listadoLaberintos = new Laberinto[6];
-            public static void main( String [] args) {
+ public class juegoDeLaberinto{
+    public static void main( String [] args) {
+        
+        
+         Scanner leer = new Scanner(System.in);
+         Random aleatorio = new Random();
+        
+            
+        
+        
+            
+                        
+             String laberinto [][] = new String [30][30];
+        // rellenando la matriz
+        
+            for(int i = 0; i<5; i++) {
+                for(int j = 0; j< 5; j++) {
+                 if (i==0 || i==29) {
+                     laberinto[i][j]="|";
+         
+                 } 
+                 else if(j==0 || j==4) {
+                     laberinto[i][j]=1;
+                     
+                 }
+                 else {
+                     
+                     laberinto[i][j]=0;
+                 }  
+                    
               
                 
+             }   
                 
-    
                 
+                    
+          } 
+             
+                System.out.print("Inicializando mapa: \n");
+                for (int i=0; i<5; i++){
+                    for (int j=0; j<5; j++) {
+                        
+                        
+                    }
+                    System.out.println("");
+                    
+                    
+                       }  
+                         
+                {
+                }
               int opcion_menu=0;
             
           while ( opcion_menu !=5) {
@@ -63,7 +98,8 @@ import java.util.Scanner;
     
     
     public static void entrarAlJuego(){
-       /* System.out.println("Seleccione el laberinto en el que desea mostrar");
+      
+        /* System.out.println("Seleccione el laberinto en el que desea mostrar");
         System.out.println("1-2-3-4-5");
         opcionLaberinto = leer.nextInt();
         mostrarlaberintoX(laberinto);
@@ -78,7 +114,7 @@ import java.util.Scanner;
     }
 
 
-    public void crearLaberintos(){
+    public void crearlaberintos(){
         Laberinto laberintodefault = new Laberinto("Default");
         listadoLaberintos[0]=laberintodefault;
         mostrarMapas();
@@ -109,3 +145,38 @@ import java.util.Scanner;
 
 
 }
+public static void Escenario1(){
+        Scanner lector = new Scanner(System.in);
+        
+        
+        String[][] matriz1 = {
+            {"|", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "|"},
+            {"|", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "|"},
+            {"|", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "|"},
+            {"|", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "|"},
+            {"|", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "|"},
+            {"|", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "|"},
+            {"|", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "|"},
+            {"|", "a", "a", " ", " ", " ", " ", "a", "a", "a", "a", "a", "a", "a", "a", "a", "|"},
+            {"|", "a", "a", " ", "a", "a", " ", "a", "a", "a", "a", "a", "a", "a", "a", "a", "|"},
+            {"|", "a", "a", " ", "a", "a", " ", "a", "a", "a", "a", "a", "a", "a", "a", "a", "|"},
+            {"|", "*", " ", " ", "a", "a", " ", " ", " ", "a", "a", "a", "a", "a", "a", "a", "|"},
+            {"|", "a", "a", "a", "a", "a", "a", "a", " ", "a", "a", "a", "a", "a", "a", "a", "|"},
+            {"|", "a", "a", "a", "a", "a", "a", "a", " ", "a", "a", "a", "a", "a", "a", "a", "|"},
+            {"|", "a", "a", "a", "a", "a", "a", "a", " ", "a", "a", " ", " ", " ", "a", "a", "|"},
+            {"|", "a", "a", "a", "a", "a", "a", "a", " ", " ", " ", " ", "a", " ", " ", "a", "|"},
+            {"|", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", " ", "x", "|"},
+            {"|", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "|"},
+            {"|", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "|"},
+            {"|", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-"}};
+        
+        
+         for (String[] matriz11 : matriz1) {
+             for (int j = 0; j < matriz1[0].length; j++) {
+                 System.out.print(matriz11[j] + "  ");
+             }
+             System.out.println();
+         }
+         
+         
+    }
