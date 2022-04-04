@@ -6,6 +6,8 @@ package LordOfTheRings.src.org.ipc1.tlotr;
 public class Main {
 
     public static void main(String[] args) {
-        new Game().play();
+        //new Game().play();
+        Game tmp = new Game();
+        tmp.play();
     }
 }

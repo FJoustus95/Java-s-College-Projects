@@ -5,12 +5,15 @@
     <property name="build" location="build" />
     <property name="dist" location="dist" />
     <property name="javadoc" location="javadoc" />
-    <!--   nombre para el jar   -->
+    <property name="mainClass" value="org.ipc1.tlotr.Main"/>
+    <property name="jarName" value="TLOTR"/>
+
+    <!--   nombre para el jar  
     <path id="build.classpath">
         <fileset dir="dist/lib">
             <include name="mariadb-java-client-2.7.3.jar" />
         </fileset>
-    </path>
+    </path> -->
     <target name="init" depends="clean">
         <!--   generamos un timestamp depends="clean"  -->
         <tstamp />
@@ -25,15 +28,15 @@
     </target>
     <target name="runClass" depends="compile" description="compile the source">
         <!--   Compilando el código en  ${src} a ${build}   -->
-        <java classname="org.ipc1.tlotr.Main" classpath="${build}" />
+        <java classname="${mainClass}" classpath="${build}" />
     </target>
     <target name="jar" depends="compile" description="Generando el directori dist para almacenar el Jar ">
         <!--   Creamos el directorio dist/lib   -->
         <mkdir dir="${dist}/lib" />
         <!--   Agregamos todo lo que hay en ${build} en ${nameDist}-${DSTAMP}.jar   -->
-        <jar jarfile="${dist}/lib/TLOTR-${DSTAMP}.jar" basedir="${build}">
+        <jar jarfile="${dist}/lib/${jarName}-${DSTAMP}.jar" basedir="${build}">
             <manifest>
-                <attribute name="Main-Class" value="org.ipc1.tlotr.Main" />
+                <attribute name="Main-Class" value="${mainClass}" />
             </manifest>
         </jar>
     </target>
@@ -47,7 +50,7 @@
     </target>
     <!--   Ejecutando el jar    -->
     <target name="run" depends="jar">
-        <java jar="${dist}/lib/TLOTR-${DSTAMP}.jar" fork="true" />
+        <java jar="${dist}/lib/${jarName}-${DSTAMP}.jar" fork="true" />
     </target>
     <!--   Eliminamos los directorios ${build} y ${dist}    -->
     <target name="clean" description="Eliminando todos los directorios">
