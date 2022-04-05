@@ -234,10 +234,24 @@ public class GameLogic {
     }
     
     //Metodo que calcula un enfrentamiento aleatorio
-    public static void randomEncounters() {
+    public static void randomEncounter() {
         
-        int encounter
+        // numero aleatorio entre 0 a la longitud de enfrentamientos
         
+        int encounter = (int) (Math.random()* encounters.length);
+        
+        // llamando a los respectivos metodos
+        if (encounters[encounter].equals("Batalla")){
+            
+            // batallaAleatoria();
+        } else if (encounters[encounter].equals("Descanso")){
+            
+            //tomarUnDescanso();
+            
+        } else {
+            //tienda();
+            
+        }
         
     }
     
