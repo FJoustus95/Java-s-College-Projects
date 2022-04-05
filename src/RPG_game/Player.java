@@ -32,12 +32,18 @@ public class Player extends Characters {
     //Metodo especifico de jugador
     @Override
     public int attack() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //metodo auto-generado 
+        return (int) (Math.random()* (xp/4 + numAtkUpgrades*3 + 3  ) + xp/10 + numAtkUpgrades*2 + numDeUpgrades +1);
+        
+        
     }
 
     @Override
     public int defend() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //metodo auto-generado
+        return (int) (Math.random()* (xp/4 + numDeUpgrades*3 + 3 ) + xp/10 + numDeUpgrades*2 + numAtkUpgrades +1);
+        
+
     }
     //dejar que el jugador escoja un rasgo de cualquiera habilidad 
     public void escogerRasgo(){

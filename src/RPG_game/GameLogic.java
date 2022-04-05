@@ -262,7 +262,7 @@ public class GameLogic {
         
         //Verificar si no es el ultimo acto
         if(act != 4)
-            randomEncounters();
+            randomEncounter();
         
         
     }
@@ -288,6 +288,69 @@ public class GameLogic {
         }
         anythingToContinued();
     }
+    
+    //creando una batalla aleatoria
+    public static void randomBattle() {     
+     limpiarConsola();
+     imprimirTitulo("Tu encontraste una criatura malvada, tendras que pelear!!!!!!");
+     anythingToContinued();
+     
+     // creando un nuevo enemigo con un nombre aleatorio
+     battle(new Enemy(enemies[(int) (Math.random()*enemies.length)], player.xp));
+     
+     
+    
+    
+    }
+    //metodo principal de la batalla
+    public static void battle(Enemy enemy){
+        
+        //loop de la batalla principal
+        while (true) {
+            limpiarConsola();
+            imprimirTitulo(enemy.name + "\nHP: " + enemy.hp + "/" + enemy.maxHp);
+            imprimirTitulo(player.name + "\nHP: " + player.hp + "/" + player.maxHp);
+            System.out.println("Escoja una opcion: ");
+            imprimirSeparador(20);
+            System.out.println("1) Pelear\n2) Usar pocion\n3) Correr ");
+            int input = readInt("->" ,3);
+            
+            //leyendo la entrada del jugador
+            if(input == 1) {
+                
+                //Pelear
+                //Calcular el daño y daño tomado 
+             int dmg = player.attack() - player.defend();
+             int dmgTook = enemy.attack() + enemy.defend();
+             
+             //revisando que el daño y daño tomado no sean negativos
+             if (dmgTook < 0) {
+                 
+             //agregar algo de daño si el jugador defiende muy bien
+             dmg -= dmgTook/2;
+             dmgTook = 0;
+             
+                 
+             }
+             if (dmg < 0)
+                dmg = 0;
+             
+             //trato peligroso a ambas partes
+             player.hp -= dmgTook;
+             enemy.hp -= dmg;
+             
+             //imprimir informacion de esta ronda
+            } else if (input ==2 ){
+                
+                
+            }
+            
+            
+        }
+        
+    }
+    
+    
     // imprimir el menu principal
     public static void imprimirMenuPrincipal(){
         limpiarConsola();
