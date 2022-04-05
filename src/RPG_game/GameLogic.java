@@ -242,6 +242,7 @@ public class GameLogic {
         
         // llamando a los respectivos metodos
         if (encounters[encounter].equals("Batalla")){
+            randomBattle();
             
             // batallaAleatoria();
         } else if (encounters[encounter].equals("Descanso")){
@@ -340,17 +341,73 @@ public class GameLogic {
              enemy.hp -= dmg;
              
              //imprimir informacion de esta ronda
+             limpiarConsola();
+             imprimirTitulo("Batalla");
+                System.out.println("Trataste " + dmg + "dañar a " + enemy.name + ".");
+             imprimirSeparador(15);
+                System.out.println("El " + enemy.name + " trata " + dmgTook + " dañarte ");
+                anythingToContinued();
+                
+                //revisando si el jugador esta vivo o muerto
+             if(player.hp <= 0) {
+                 playerDied(); //metodo del final de juego
+                 
+                 break;
+                     
+             }else if( enemy.hp <= 0) {
+                 //decirle al jugador que gano la batalla
+             limpiarConsola();
+             imprimirTitulo("Tu venciste  al " + enemy.name + "!!!!");
+             
+             //incrementa el xp del jugador
+              player.xp += enemy.xp;
+                 System.out.println("Tu ganaste " + enemy.xp + " XP!");
+                 anythingToContinued();
+                 break;
+                 
+                 
+                 
+             }  
             } else if (input ==2 ){
                 
                 
-            }
-            
-            
-        }
-        
+            } else {
+                //correr
+                
+                limpiarConsola();
+                
+                //revisar que el jugador no este en el ultimo acto ( pelea final )
+                if ( act != 4) {
+                    //35% probabilidad para escapar
+                    if(Math.random()* 10 + 1 <= 3.5) {
+                        imprimirTitulo("Pudiste escapar de " + enemy.name + "!");
+                        anythingToContinued();
+                        break;
+                       
+                    } else {
+                        imprimirTitulo(" No pudiste escapar");
+                        
+                        //calculando el daño tomado del jugador
+                        
+                      int dmgTook = enemy.attack();
+                        System.out.println("En tu prisa por tomar 0 " + dmgTook + " Daño!");
+                        anythingToContinued();
+                        
+                        //revisar si el jugador todavia esta vivo
+                        if (player.hp <= 0)
+                            playerDied();
+                          
+                    }
+             
+                }else {
+                    imprimirTitulo("No puedes escapar del emperador malvado");
+                    anythingToContinued();
+                    
+                }
+            }   
+        }   
     }
-    
-    
+
     // imprimir el menu principal
     public static void imprimirMenuPrincipal(){
         limpiarConsola();
@@ -364,7 +421,18 @@ public class GameLogic {
         
         
     }
-    
+    // metodo que llama cuando el jugador muere
+    public static void playerDied(){
+        limpiarConsola();
+        imprimirTitulo("Tu moriste :c ");
+        imprimirTitulo("Ganaste " + player.hp + "Xp en tu viaje, Intenta ganar mas la proxima vez");
+        imprimirSeparador(15);
+        System.out.println("Gracias por jugar!!!!!!!");
+        imprimirSeparador(15);
+        isRunning = false;
+        
+        
+    }
 
         // loop del juego principal
     
