@@ -241,7 +241,7 @@ public class GameLogic {
         int encounter = (int) (Math.random()* encounters.length);
         
         // llamando a los respectivos metodos
-        if (encounters[encounter].equals("Batalla")){
+        if (encounters[encounter].equals("Battle")){
             randomBattle();
             
             // batallaAleatoria();
@@ -440,15 +440,17 @@ public class GameLogic {
         while (isRunning){
           imprimirMenuPrincipal();
           int input = readInt("-> ",3);
-            if (input == 1) 
-                
+            switch (input) {
+                case 1:
                     continuarViaje();
-                   
-            else if (input == 2)
+                    break;
+                case 2:
                     informacionPersonaje();
-                    
-                else
+                    break;
+                default:
                     isRunning = false;
+                    break;
+            }
                     
             
           
