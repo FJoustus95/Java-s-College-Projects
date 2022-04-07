@@ -8,6 +8,8 @@ public final class Player extends Characters {
         public int numAtkUpgrades, numDeUpgrades;
         
     
+        //estadisticas adicionales del jugador
+        int gold, restsLeft, pots;
         
         //arreglo para almacenar habilidades
         public String[] mejorAtaque = {"Strength", "Power", "Hight", "Godlike Strength"};
@@ -22,6 +24,12 @@ public final class Player extends Characters {
         //Ajuste de numero de actualizaciones para 0
         this.numAtkUpgrades = 0;
         this.numDeUpgrades = 0;
+        
+        //establecer estadisticas adicionales
+        this.gold = 5;
+        this.restsLeft = 1;
+        this.pots = 0;
+        
         
         //funcion para crear rasgos cuando crea un jugador
         

@@ -128,4 +128,18 @@ public static void imprimirFourACTOutro() {
         
         GameLogic.anythingToContinued();
     }
+public static void printEnd(Player player) {
+        GameLogic.limpiarConsola();
+        GameLogic.imprimirSeparador(30);
+        System.out.println("ACT FINAL - FINAL");
+        GameLogic.imprimirSeparador(30);
+        System.out.println("Pues alfinal terminaste tu venganza, se debe sentir chido no?XDDDDDDDDDecidiste dejar todo atras para hacer un viaje a lo desconocido");
+        System.out.println("No sabes lo que te esperara, pero ese deseo de venganza te impulsa a seguir adelante");
+        System.out.println("y planificas una ruta para ir a enfrentarte con el emperador malvado");
+        System.out.println("Sera un camino duro, con muchas dificultades pero desgraciadamente ya no te queda nada");
+        System.out.println("Asi que te preparas para atravesar calabozos, montañas, rios, bosques, desiertos , todo para tu deseo de venganza");
+        
+        GameLogic.anythingToContinued();
+    }
+
 }

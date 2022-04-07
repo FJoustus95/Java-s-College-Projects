@@ -226,7 +226,7 @@ public class GameLogic {
             player.hp = player.maxHp;
             
             //Llamando al enfrentamiento final
-            //batallaFinal();
+            finalBattle();
             
         }
         
@@ -246,12 +246,12 @@ public class GameLogic {
             
             // batallaAleatoria();
         } else if (encounters[encounter].equals("Descanso")){
-            
+            takeRest();
             //tomarUnDescanso();
             
         } else {
             //tienda();
-            
+            shop();
         }
         
     }
@@ -273,7 +273,16 @@ public class GameLogic {
         imprimirTitulo("Informacion sobre el Personaje");
         System.out.println(player.name + "\tHP: " + player.hp + "/" + player.maxHp);
         imprimirSeparador(20);
-        System.out.println("XP: " + player.xp);
+        
+        // experiencia y oro del jugador
+        System.out.println("XP: " + player.xp + "\tGold: " + player.gold);
+        imprimirSeparador(20);
+        
+        // numero de pociones (pots)
+        System.out.println("No. de pociones: " + player.pots);
+        imprimirSeparador(20);
+        
+        
         
         
         //Imprimir los rasgos seleccionados
@@ -289,7 +298,70 @@ public class GameLogic {
         }
         anythingToContinued();
     }
+    // tienda o encontrandose con un vendedor ambulante
+    public static void shop() {
+        limpiarConsola();
+        imprimirTitulo("Te encontraste a un misterioso extraño\nEl te ofrece algo: ");
+        int price = (int) (Math.random()* (10 + player.pots*3) + 10 + player.pots);
+        System.out.println("- Pocion Magica: " + price + " oro ");
+        imprimirSeparador(20);
+        
+        //preguntarle al jugador para comprar uno
+        System.out.println("Quieres comprar una?\n1) Si claro\n2) No gracias XD");
+        int input = readInt("->" , 2);
+        
+        //chequear si el jugador quiere comprar uno
+        if (input ==1) {
+            limpiarConsola();
+            
+            //revisar si el jugador tiene dinero suficiente
+            if (player.gold >= price) {
+                
+                imprimirTitulo("Tu compraste una pocion magica de " + price + " oro ");
+                player.pots++;
+                player.gold -= price;
+     
+            }else
+            imprimirTitulo("No tienes suficiente dinero para comprar esto");
+            anythingToContinued();
+            
+            
+            
+        }
+        
+    }
+    //Tomando un descanso
+    public static void takeRest() {
+        limpiarConsola();
+        if (player.restsLeft >= 1) {
+            imprimirTitulo("Quieres tomar un descanso??? (" + player.restsLeft + " descanso restantes)");
+            System.out.println("1) Si\n2) No gracias");
+            int input = readInt("->" , 2);
+            if(input ==1) {
+                
+                //jugador realmente toma un descanso
+            
+            limpiarConsola();
+            if (player.hp < player.maxHp) {
+                int hpRestored = (int) (Math.random() * (player.xp/4 +1 ) + 10);
+                player.hp +=hpRestored;
+                if(player.hp > player.maxHp)
+                    player.hp = player.maxHp;
+                System.out.println("Tomaste un descanso y restauraste " + hpRestored + " Salud ");
+                System.out.println("Tu estas ahora " + player.hp + "/" + player.maxHp + " Salud");
+                player.restsLeft--;
+                   
+            }
     
+           } else
+                System.out.println("Tienes completa la energia, no necesitas descansar");
+            anythingToContinued();
+            
+            
+        }
+        
+        
+    }
     //creando una batalla aleatoria
     public static void randomBattle() {     
      limpiarConsola();
@@ -362,6 +434,23 @@ public class GameLogic {
              //incrementa el xp del jugador
               player.xp += enemy.xp;
                  System.out.println("Tu ganaste " + enemy.xp + " XP!");
+                 
+                 //gotas aleatorias
+                 boolean addRest = (Math.random()*5 + 1 <= 2.25);
+                 int goldEarned = (int) (Math.random()*enemy.xp);
+                 
+                 if(addRest) {
+                     player.restsLeft++;
+                     System.out.println("Ganaste la posibilidad de tener un descanso adicional!");
+                     
+                 }
+                 if(goldEarned > 0) {
+                     player.gold += goldEarned;
+                     System.out.println("Tu recolectas " + goldEarned + " oro del enemigo " + enemy.name + " muerto!" );
+                     
+                     
+                     
+                 }
                  anythingToContinued();
                  break;
                  
@@ -369,7 +458,29 @@ public class GameLogic {
                  
              }  
             } else if (input ==2 ){
-                
+               //usar pocion
+               
+               limpiarConsola();
+               if (player.pots > 0 && player.hp < player.maxHp) {
+               // el jugador puede tomar una pocion
+               //asegurarse que el jugador quiera beber la pocion
+               
+               imprimirTitulo("Quires tomar una pocion?? (" + player.pots + " restante)");
+                   System.out.println("1) Si\n2) Talvez luego");
+                   input = readInt("->" ,2);
+                   
+                   if (input == 1) {
+                       //jugador realmente lo tomo
+                       player.hp = player.maxHp;
+                       limpiarConsola();
+                       imprimirTitulo("Bebiste una pocion magica, Se restaurara tu salud a " + player.maxHp);
+                       anythingToContinued();
+                       
+                       
+                   }
+                   
+                   
+               }
                
             } else {
                 //correr
@@ -417,6 +528,20 @@ public class GameLogic {
         System.out.println("1) Continua con tu viaje!!!!!");
         System.out.println("2) Informacion de personaje");
         System.out.println("3) Salir del Juego");
+        
+        
+        
+    }
+    //Batalla final (ultima del juego)
+    public static void finalBattle() {
+        //crear un emperador malvado y dejar que peleas contra el
+        
+        battle(new Enemy("THE EVIL EMPEROR", 300));
+        
+        //imprimiendo el final adecuado
+        
+        Story.printEnd(player);
+        isRunning = false;
         
         
         
