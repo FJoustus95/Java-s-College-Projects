@@ -2,7 +2,7 @@
 package RPG_game;
 
 
-public class Player extends Characters {
+public final class Player extends Characters {
         
         //Interos para almacenar numero de mejoras/habilidades 
         public int numAtkUpgrades, numDeUpgrades;

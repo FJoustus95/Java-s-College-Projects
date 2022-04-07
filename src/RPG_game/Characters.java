@@ -9,11 +9,11 @@ public  abstract class Characters {
     public int maxHp, hp, xp; //nota Hp = hit points
     
     //Contructor de los personajes
-    public Characters( String name, int hp, int xp){
+    public Characters( String name, int maxHp, int xp){
         this.name = name;
-        this.hp = hp;
+        this.maxHp = maxHp;  
         this.xp = xp;
-        
+        this.hp = maxHp;     
         
         
         

@@ -132,7 +132,7 @@ public class GameLogic {
         
         
         //Empezar main game loop 
-        gameloop();
+        gameLoop();
         
             
         
@@ -321,8 +321,8 @@ public class GameLogic {
                 
                 //Pelear
                 //Calcular el daño y daño tomado 
-             int dmg = player.attack() - player.defend();
-             int dmgTook = enemy.attack() + enemy.defend();
+             int dmg = player.attack() - enemy.defend();
+             int dmgTook = enemy.attack() + player.defend();
              
              //revisando que el daño y daño tomado no sean negativos
              if (dmgTook < 0) {
@@ -370,7 +370,7 @@ public class GameLogic {
              }  
             } else if (input ==2 ){
                 
-                
+               
             } else {
                 //correr
                 
@@ -400,7 +400,7 @@ public class GameLogic {
                     }
              
                 }else {
-                    imprimirTitulo("No puedes escapar del emperador malvado");
+                    imprimirTitulo("TU NO PUEDES ESCAPAR DEL EMPERADOR MALVADO");
                     anythingToContinued();
                     
                 }
@@ -436,17 +436,21 @@ public class GameLogic {
 
         // loop del juego principal
     
-        public static void gameloop(){
+        public static void gameLoop(){
         while (isRunning){
           imprimirMenuPrincipal();
           int input = readInt("-> ",3);
-          if (input ==1) 
-              continuarViaje();
-              
-          else if (input == 2)    
-              informacionPersonaje();
-          else 
-              isRunning = false;
+            if (input == 1) 
+                
+                    continuarViaje();
+                   
+            else if (input == 2)
+                    informacionPersonaje();
+                    
+                else
+                    isRunning = false;
+                    
+            
           
             
             
