@@ -6,8 +6,7 @@ public  abstract class Characters {
     
     //atributos de todos los personajes
     public String name;
-    public int maxHp, hp, xp; //nota Hp = hit points
-    
+    public int maxHp, hp, xp; //nota Hp = hit points or heath point    
     //Contructor de los personajes
     public Characters( String name, int maxHp, int xp){
         this.name = name;
