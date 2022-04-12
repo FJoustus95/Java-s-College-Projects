@@ -3,6 +3,6 @@ package SuperAutoPets.Animales.Desertico;
 
 
 public interface Desertico {
-    public void AtributosDesertico(int attack, int life, String name);
+    public void AtributosDesertico(String name, int attack, int life);
     
 }

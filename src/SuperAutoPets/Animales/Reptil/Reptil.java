@@ -3,6 +3,6 @@ package SuperAutoPets.Animales.Reptil;
 
 
 public interface Reptil {
-    public void AtributosReptil(int attack, int life, String name);
+    public void AtributosReptil(String name, int attack, int life);
     
 }

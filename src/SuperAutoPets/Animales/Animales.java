@@ -2,7 +2,7 @@
 package SuperAutoPets.Animales;
 
 //Clase astracta de los Animales 
-public  abstract class Animales extends Object {
+public  abstract  class  Animales extends Object {
 
     int attack, life, maxLife,xp, eachEffectAnimal, eachAbilityAnimal;
     String name, types;

@@ -1,6 +1,8 @@
 
 package SuperAutoPets;
 
+import static SuperAutoPets.Animales.GameLogicS.imprimirSeparador;
+import static SuperAutoPets.Animales.GameLogicS.imprimirTitulo;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -19,9 +21,10 @@ public class Menu_Principal {
     //do while para las opciones del ciclo
     
     while(!salir) {
-        System.out.println("---------------------");
-        System.out.println("Juego Super Auto Pets");
-        System.out.println("---------------------");
+        imprimirSeparador(30);
+        imprimirTitulo("|      SUPER AUTO PETS      |");
+        imprimirSeparador(30);
+        
         
         System.out.println();
         System.out.println();

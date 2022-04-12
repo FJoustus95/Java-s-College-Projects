@@ -22,7 +22,7 @@ public class GameLogicS {
     
     public static void imprimirSeparador(int n) {
         for (int i = 0; i < n; i++) 
-            System.out.println("-");
+            System.out.print("-");
             
             System.out.println();  
     }

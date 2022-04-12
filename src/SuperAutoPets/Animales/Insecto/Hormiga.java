@@ -4,7 +4,7 @@ package SuperAutoPets.Animales.Insecto;
 import SuperAutoPets.Animales.Animales;
 import SuperAutoPets.Animales.Terrestre.Terrestre;
 
-public final class Hormiga extends Animales implements Insecto, Terrestre {
+public  class Hormiga extends Animales implements Insecto, Terrestre {
     
     //Iteracion para almacenar el numero de mejoras/Habilidades
     public int numAtkUpgrades, numDeUpgrades;
@@ -23,12 +23,12 @@ public final class Hormiga extends Animales implements Insecto, Terrestre {
     }
 
     @Override
-    public void AtributosInsecto(int attack, int liffe, String name) {
+    public void AtributosInsecto(String name, int attack, int liffe) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void AtributosTerrestre(int attack, int life, String name) {
+    public void AtributosTerrestre(String name, int attack, int life) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
