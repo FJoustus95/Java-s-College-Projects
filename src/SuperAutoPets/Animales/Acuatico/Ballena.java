@@ -10,14 +10,16 @@ public class Ballena extends Animales implements Acuatico {
     //Succión: Al iniciar la partida trague al aliado de delante y suéltalo como lvl 1/2/3 después de debilitarse
 
     
-   
-    public Ballena() {
+    //constructor especifico de ballena
+    public Ballena(String name) {
+        //llamando al constructor de la superclase
+        super(name, 3, 8, 0);
         
         
     }
 
     @Override
-    public void AtributosAcuatico(int attack, int life, String nombre) {
+    public void AtributosAcuatico(String name, int attack, int life) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
