@@ -1,18 +1,49 @@
 
 package SuperAutoPets.Animales.Mamifero;
 
+import SuperAutoPets.Animales.Animales;
 
-public class Nutria implements Mamifero {
+
+public class Nutria extends Animales implements Mamifero {
     
     //Pertenece a tier 1
     //Ventaja económica: Da a un aliado aleatorio (+1/+1)/(+2/+2)/(+3/+3) al comprarse
     
-    public Nutria() {
+    //constructor especifico de nutria
+    public Nutria(String name) {
+        //llamando al constructor de la superclase
+        super(name, 1, 2, 0);
+        
         
     }
 
     @Override
-    public void AtributosMamifero(int attack, int life, String name) {
+    public void AtributosMamifero(String name, int attack, int life) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int attack() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int life() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int eachEffectAnimal() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int eachAbilityAnimal() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String types() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
