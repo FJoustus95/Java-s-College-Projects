@@ -11,7 +11,14 @@ public final class Hormiga extends Animales implements Insecto, Terrestre {
     
     //Pertenece a tier 1
     //Compañerismo: Da a un aliado al azar (+2/+1)/(+4/+2)/(+6/+3) al morir.
-    public Hormiga("Hormiga", 2, 1 ) {
+    
+    //Constructor especifico de Hormiga
+    
+    public Hormiga(String name)  {
+        //llamando al constructor de la superclase
+        super(name, 2, 1, 0);
+        
+        
         
     }
 
