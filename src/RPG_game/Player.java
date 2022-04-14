@@ -42,7 +42,7 @@ public final class Player extends Characters {
     public int attack() {
         //metodo auto-generado 
         return (int) (Math.random()* (xp/4 + numAtkUpgrades*3 + 3  ) + xp/10 + numAtkUpgrades*2 + numDeUpgrades +1);
-        
+       
         
     }
 
