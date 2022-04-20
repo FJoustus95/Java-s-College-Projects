@@ -12,7 +12,7 @@ public class Nutria extends Animales implements Mamifero {
     //constructor especifico de nutria
     public Nutria(String name) {
         //llamando al constructor de la superclase
-        super(name, 1, 2, 0);
+        super("Nutria", 1, 2, 0);
         
         
     }
@@ -24,12 +24,12 @@ public class Nutria extends Animales implements Mamifero {
 
     @Override
     public int attack() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (int) (1);
     }
 
     @Override
     public int life() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (int) (2);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class Nutria extends Animales implements Mamifero {
 
     @Override
     public String types() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (String) "Nutria"; 
     }
     
 }

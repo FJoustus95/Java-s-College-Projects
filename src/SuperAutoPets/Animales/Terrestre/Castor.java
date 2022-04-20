@@ -13,7 +13,7 @@ public class Castor extends Animales implements Terrestre, Acuatico {
     //constructor especifico de castor
     public Castor(String name) {
         //llamando al constructor de la superclase
-        super(name,2, 2, 0);
+        super("Castor",2, 2, 0);
     }
 
     @Override
@@ -28,12 +28,12 @@ public class Castor extends Animales implements Terrestre, Acuatico {
 
     @Override
     public int attack() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (int) (2);
     }
 
     @Override
     public int life() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (int) (2);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class Castor extends Animales implements Terrestre, Acuatico {
 
     @Override
     public String types() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (String) ("Terrestre" + "/" + " Acuatico");
     }
     
 }

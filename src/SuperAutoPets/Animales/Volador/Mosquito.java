@@ -12,7 +12,7 @@ public  class Mosquito extends Animales implements Volador {
     //constructor especifico de mosquito
     public Mosquito(String name) {
         //llamando al constructor de la superclase
-        super(name,2, 2, 0);
+        super("Mosquito",2, 2, 0);
         
     }
 
@@ -23,12 +23,12 @@ public  class Mosquito extends Animales implements Volador {
 
     @Override
     public int attack() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (int) (2);
     }
 
     @Override
     public int life() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (int) (2);
     }
 
     @Override
@@ -43,7 +43,7 @@ public  class Mosquito extends Animales implements Volador {
 
     @Override
     public String types() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (String) ("Volador");
     }
     
 }

@@ -12,7 +12,7 @@ public class Grillo extends Animales implements Insecto {
     //constructor especifico de grillo
     public Grillo(String name) {
         //llamando al constructor de la superclase
-        super(name, 1, 2, 0);
+        super("Grillo", 1, 2, 0);
     }
 
     @Override
@@ -22,12 +22,12 @@ public class Grillo extends Animales implements Insecto {
 
     @Override
     public int attack() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (int) (1);
     }
 
     @Override
     public int life() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (int) (2);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class Grillo extends Animales implements Insecto {
 
     @Override
     public String types() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (String) "Insecto";
     }
     
 }

@@ -12,7 +12,7 @@ public class Escarabajo extends Animales implements Insecto {
     //constructor especifico de escarabajo
     public Escarabajo(String name) {
         //llamando al constructor de la superclase
-        super(name, 2, 3, 0);
+        super("Escarabajo", 2, 3, 0);
     }
 
     @Override
@@ -22,12 +22,12 @@ public class Escarabajo extends Animales implements Insecto {
 
     @Override
     public int attack() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (int) (2);
     }
 
     @Override
     public int life() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (int) (3);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class Escarabajo extends Animales implements Insecto {
 
     @Override
     public String types() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (String) "Insecto";
     }
     
 }

@@ -13,7 +13,7 @@ public  class Pescado extends Animales implements Acuatico {
     public Pescado(String name) {
         
         //llamando al constructor de la superclase
-        super(name,2, 3, 0);
+        super("pescado",2, 3, 0);
         
     }
 
@@ -24,12 +24,13 @@ public  class Pescado extends Animales implements Acuatico {
 
     @Override
     public int attack() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (int) (2);
+
     }
 
     @Override
     public int life() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (int) (1);
     }
 
     @Override
@@ -44,7 +45,7 @@ public  class Pescado extends Animales implements Acuatico {
 
     @Override
     public String types() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (String) "Acuatico";
     }
     
     

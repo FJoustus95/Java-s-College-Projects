@@ -4,8 +4,8 @@ package SuperAutoPets.Animales;
 //Clase astracta de los Animales 
 public  abstract  class  Animales extends Object {
 
-    int attack, life, maxLife,xp, eachEffectAnimal, eachAbilityAnimal, level;
-    String name, types;
+    public int attack, life, maxLife,xp, eachEffectAnimal, eachAbilityAnimal, level;
+    public String name, types;
     
     //Unico constructor de todos los animales
     public Animales(String name,int attack, int maxLife,int xp ){
