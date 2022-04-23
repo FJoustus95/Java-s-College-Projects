@@ -5,19 +5,128 @@
  */
 package guivideo;
 
-/**
- *
- * @author U
- */
+import javax.swing.*;
+import java.util.*;
+import java.io.*;
+import java.text.*;
+
+
 public class AddEmployee extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AddEmployee
-     */
+    ArrayList<Job> jobs;
+    ArrayList<Employee> employees;
+    DecimalFormat formatter;
+    
+    
+    
     public AddEmployee() {
         initComponents();
+        
+        formatter = new DecimalFormat("#,###,00");
+        
+        jobs = new ArrayList<Job>();
+        employees = new ArrayList<Employee>();
+        
+        populateArrayList();
+        
+        String []jobsArray = new String [jobs.size()];
+        
+        for (int i = 0; i < jobs.size(); i++) {
+            
+            jobsArray[i] = jobs.get(i).getNameOfJob() + ", R" + formatter.format(jobs.get(i).getSalary());
+            
+            
+        }
+        
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<> (jobsArray));
     }
-
+    
+    public void saveEmployeesToFile(){
+        
+        try { FileOutputStream file = new FileOutputStream("Employees.dat");
+              ObjectOutputStream outputFile = new ObjectOutputStream(file);
+              
+            for (int i = 0; i < employees.size(); i++) {
+                
+                outputFile.writeObject(employees.get(i));
+                
+            }
+            outputFile.close();
+            JOptionPane.showMessageDialog(null, "Successfully saved");
+            this.dispose();
+            
+            
+        }catch (IOException e){
+            
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            
+            
+        }
+        
+    }
+    
+    public void populateArrayList(){
+        try{
+            FileInputStream file = new FileInputStream("Jobs.dat");
+            ObjectInputStream inputFile = new ObjectInputStream(file);
+            
+            boolean edOfFile =false;
+            
+            while (!edOfFile) {
+                try{
+                    
+                    jobs.add((Job) inputFile.readObject());
+                    
+                } catch(EOFException e) {
+                    
+                    edOfFile = true;
+                    
+                }catch (Exception f){
+                    
+                    JOptionPane.showMessageDialog(null, f.getMessage());
+                    
+                }
+                
+            }
+                    inputFile.close();
+                    
+        }catch (IOException e) {
+            
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            
+        }
+       
+        try{
+            FileInputStream file2 = new FileInputStream("Employees.dat");
+            ObjectInputStream inputFile2 = new ObjectInputStream(file2);
+            
+            boolean edOfFile =false;
+            
+            while (!edOfFile) {
+                try{
+                    
+                    employees.add((Employee) inputFile2.readObject());
+                    
+                } catch(EOFException e) {
+                    
+                    edOfFile = true;
+                    
+                }catch (Exception f){
+                    
+                    JOptionPane.showMessageDialog(null, f.getMessage());
+                    
+                }
+                
+            }
+                    inputFile2.close();
+                    
+        }catch (IOException e) {
+            
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            
+        }
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,7 +147,8 @@ public class AddEmployee extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Create a New Job");
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setText("Add a new Employee by entering the details below");
@@ -64,13 +174,20 @@ public class AddEmployee extends javax.swing.JFrame {
         jComboBox1.setBackground(new java.awt.Color(0, 102, 204));
         jComboBox1.setEditable(true);
         jComboBox1.setFont(new java.awt.Font("Dialog", 0, 17)); // NOI18N
+        jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton1.setBackground(new java.awt.Color(0, 102, 204));
         jButton1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save.png"))); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/blue-save.png"))); // NOI18N
         jButton1.setText("Save");
         jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,11 +240,38 @@ public class AddEmployee extends javax.swing.JFrame {
                     .addComponent(jTextField3))
                 .addGap(29, 29, 29)
                 .addComponent(jButton1)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        if (jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty() ||
+                jTextField3.getText().isEmpty()) {
+            
+            JOptionPane.showMessageDialog(null, "please fill all fields", "Error Message", 2);
+                  
+        }else {
+            
+            String name = jTextField1.getText().trim();
+            String surname = jTextField2.getText().trim();
+            int jobIndex = jComboBox1.getSelectedIndex();
+            Job job = jobs.get(jobIndex);
+            int staffNum = Integer.parseInt(jTextField3.getText().trim());
+            
+            Employee employee = new Employee(name, surname, job, staffNum);
+            employees.add(employee);
+            
+            saveEmployeesToFile();
+            
+            
+            
+        }      
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

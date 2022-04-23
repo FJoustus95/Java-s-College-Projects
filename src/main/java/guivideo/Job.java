@@ -4,11 +4,11 @@ package guivideo;
 import java.io.*;
 
 public class Job implements Serializable {
-    private int salary;
+    private double salary;
     private String nameOfJob;
 
     
-    public Job(int salary, String nameOfJob) {
+    public Job(double salary, String nameOfJob) {
         this.salary = salary;
         this.nameOfJob = nameOfJob;
     }
@@ -19,7 +19,7 @@ public class Job implements Serializable {
     }
     
     
-    public int getSalary() {
+    public double getSalary() {
         return salary;
     }
 

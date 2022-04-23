@@ -1,23 +1,164 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package guivideo;
 
-/**
- *
- * @author U
- */
+import javax.swing.*;
+import java.util.*;
+import java.io.*;
+import java.text.*;
+
 public class EditEmployee extends javax.swing.JFrame {
 
-    /**
-     * Creates new form EditEmployee
-     */
+     ArrayList<Job> jobs;
+    ArrayList<Employee> employees;
+    DecimalFormat formatter;
+    
     public EditEmployee() {
         initComponents();
+        
+         formatter = new DecimalFormat("#,###,00");
+        
+        jobs = new ArrayList<Job>();
+        employees = new ArrayList<Employee>();
+        
+        populateArrayList();
+        
+        String []jobsArray = new String [jobs.size()];
+        
+        for (int i = 0; i < jobs.size(); i++) {
+            
+            jobsArray[i] = jobs.get(i).getNameOfJob() + ", Q" + formatter.format(jobs.get(i).getSalary());
+            
+            
+        }
+        
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<> (jobsArray));
+        
+        String []empArray = new String [employees.size()];
+        
+        for (int i = 0; i < employees.size(); i++) {
+            
+            empArray[i] = employees.get(i).getName() + ", " + employees.get(i).getSurname();
+            
+        }
+        
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<> (empArray));
+        
+        jComboBox1.setSelectedIndex(0);
+        
+    }
+    
+    public void populateArrayList(){
+        try{
+            FileInputStream file = new FileInputStream("Jobs.dat");
+            ObjectInputStream inputFile = new ObjectInputStream(file);
+            
+            boolean edOfFile =false;
+            
+            while (!edOfFile) {
+                try{
+                    
+                    jobs.add((Job) inputFile.readObject());
+                    
+                } catch(EOFException e) {
+                    
+                    edOfFile = true;
+                    
+                }catch (Exception f){
+                    
+                    JOptionPane.showMessageDialog(null, f.getMessage());
+                    
+                }
+                
+            }
+                    inputFile.close();
+                    
+        }catch (IOException e) {
+            
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            
+        }
+       
+        try{
+            FileInputStream file2 = new FileInputStream("Employees.dat");
+            ObjectInputStream inputFile2 = new ObjectInputStream(file2);
+            
+            boolean edOfFile =false;
+            
+            while (!edOfFile) {
+                try{
+                    
+                    employees.add((Employee) inputFile2.readObject());
+                    
+                } catch(EOFException e) {
+                    
+                    edOfFile = true;
+                    
+                }catch (Exception f){
+                    
+                    JOptionPane.showMessageDialog(null, f.getMessage());
+                    
+                }
+                
+            }
+                    inputFile2.close();
+                    
+        }catch (IOException e) {
+            
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            
+        }
+        
+    }
+    
+    public void saveEmployeesToFile(){
+        
+        try { FileOutputStream file = new FileOutputStream("Employees.dat");
+              ObjectOutputStream outputFile = new ObjectOutputStream(file);
+              
+            for (int i = 0; i < employees.size(); i++) {
+                
+                outputFile.writeObject(employees.get(i));
+                
+            }
+            outputFile.close();
+            JOptionPane.showMessageDialog(null, "Successfully saved");
+            this.dispose();
+            
+            
+        }catch (IOException e){
+            
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            
+            
+        }
+        
     }
 
+    public void saveEmployeesToDelete(){
+        
+        try { FileOutputStream file = new FileOutputStream("Employees.dat");
+              ObjectOutputStream outputFile = new ObjectOutputStream(file);
+              
+            for (int i = 0; i < employees.size(); i++) {
+                
+                outputFile.writeObject(employees.get(i));
+                
+            }
+            outputFile.close();
+            JOptionPane.showMessageDialog(null, "Successfully deleted!");
+            this.dispose();
+            
+            
+        }catch (IOException e){
+            
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            
+            
+        }
+        
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,7 +182,8 @@ public class EditEmployee extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Edit Employee Details");
         setPreferredSize(new java.awt.Dimension(697, 440));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
@@ -89,16 +231,28 @@ public class EditEmployee extends javax.swing.JFrame {
         });
 
         jButton1.setBackground(new java.awt.Color(0, 102, 204));
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save.png"))); // NOI18N
+        jButton1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/blue-save.png"))); // NOI18N
         jButton1.setText("Save");
         jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(0, 102, 204));
-        jButton2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exit.png"))); // NOI18N
+        jButton2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/delete-icon.png"))); // NOI18N
         jButton2.setText("Delete");
         jButton2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -106,6 +260,13 @@ public class EditEmployee extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(44, 44, 44))
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(122, 122, 122)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -124,14 +285,7 @@ public class EditEmployee extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(44, 44, 44))
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(126, 126, 126))
         );
         layout.setVerticalGroup(
@@ -148,34 +302,93 @@ public class EditEmployee extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2))
                 .addGap(83, 83, 83))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
+        
+       int selectedIndex =jComboBox1.getSelectedIndex();
+        
+        jTextField1.setText(employees.get(selectedIndex).getName());
+        jTextField2.setText(employees.get(selectedIndex).getSurname());
+        jTextField3.setText(employees.get(selectedIndex).getStaffNum() + "");
+        
+        Job job = employees.get(selectedIndex).getJob();
+        
+        int index = 0;
+            for (int i = 0; i < jobs.size(); i++) {
+                if(jobs.get(i).equals(job)) {
+                    
+            
+        
+            index = i;
+            break;
+            }
+          }       
+         
+           jComboBox2.setSelectedIndex(index);
+                
+                
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+         int selectedIndex =jComboBox1.getSelectedIndex();
+        
+         employees.remove(selectedIndex);
+         
+         saveEmployeesToDelete();
+         
+         
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        if (jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty() ||
+                jTextField3.getText().isEmpty()) {
+            
+            JOptionPane.showMessageDialog(null, "please fill all fields", "Error Message", 2);
+                  
+        }else {
+            
+            int selectedIndex =jComboBox1.getSelectedIndex();
+            
+            employees.get(selectedIndex).setName(jTextField1.getText().trim());
+            employees.get(selectedIndex).setSurname(jTextField2.getText().trim());
+            employees.get(selectedIndex).setStaffNum(Integer.parseInt(jTextField3.getText().trim()));
+            Job job = jobs.get(jComboBox2.getSelectedIndex());
+            employees.get(selectedIndex).setJob(job);
+            
+            
+            saveEmployeesToFile();
+            
+            //note 
+            
+        }         
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
